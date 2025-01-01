@@ -1,0 +1,20 @@
+#Bubble Sort
+
+nums = []
+running = True
+
+while running: 
+    number = int(input("num: "))
+    if number <= 0:
+        running = False
+    elif number > 0:
+        nums.append(number)
+print(f"unsorted numbers: {nums}")
+running = True
+while running: 
+    running = False
+    for num in range(len(nums)-1):
+      if nums[num] > nums[num+1]:
+          nums[num], nums[num+1] = nums[num+1], nums[num]
+          running = True
+print(f"sorted numbers: {nums}")
