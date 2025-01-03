@@ -1,0 +1,75 @@
+import random
+
+dice_art = {
+    1: (
+"┌─────────┐",
+"│         │",
+"│    ●    │",
+"│         │",
+"└─────────┘"),
+2:  (
+"┌─────────┐",
+"│  ●      │",
+"│         │",
+"│      ●  │",
+"└─────────┘"),
+3: (
+"┌─────────┐",
+"│  ●      │",
+"│    ●    │",
+"│      ●  │",
+"└─────────┘"),
+4: (
+"┌─────────┐",
+"│  ●   ●  │",
+"│         │",
+"│  ●   ●  │",
+"└─────────┘"),
+5: (
+"┌─────────┐",
+"│  ●   ●  │",
+"│    ●    │",
+"│  ●   ●  │",
+"└─────────┘"),
+6: (
+"┌─────────┐",
+"│  ●   ●  │",
+"│  ●   ●  │",
+"│  ●   ●  │",
+"└─────────┘")
+}
+num_of_dice = 2
+num_of_guess = 3
+
+def dice_roll(num_of_dice):
+    dice = []
+    for die in range(num_of_dice):
+        dice.append(random.randint(1,6))
+    return dice
+
+def display_dice(num_of_dice):
+    for line in range(5):
+        for die in dice: 
+            print(dice_art.get(die)[line],end="")
+        print()
+
+def get_total(num_of_dice,dice):
+    total = 0
+    for die in dice:
+        total += die
+    return total
+  
+dice = dice_roll(num_of_dice)
+total = get_total(num_of_dice,dice)
+running = True
+
+while running: 
+    guess = int(input("guess the total of two dice rolled: "))
+    display_dice(num_of_dice)
+    if guess == total:
+        print(f"you guess {guess} and thats correct!")
+        running = False
+    elif guess != total:
+        print(f"you guess {guess} the total is  {total} try again")
+        dice = dice_roll(num_of_dice)
+        total = get_total(num_of_dice,dice)
