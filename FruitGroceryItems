@@ -5,7 +5,7 @@ grocery_items = {"grapes": 15,
                  "apple": 30, 
                  "orange": 35, 
                  "banana": 15}
-for item in grocery_items:
+for item in sorted(grocery_items.keys()):
    print(f"{item:10}:{grocery_items[item]}")
 print("-------------")
 def get_item():
