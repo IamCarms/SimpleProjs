@@ -1,0 +1,50 @@
+grocery_items = {"grapes": 15, 
+                 "strawbery": 20, 
+                 "mango": 25, 
+                 "pear": 40, 
+                 "apple": 30, 
+                 "orange": 35, 
+                 "banana": 15}
+for item in grocery_items:
+   print(f"{item:10}:{grocery_items[item]}")
+print("-------------")
+def get_item():
+    your_cart = []
+    running = True
+    while running:
+      item = input("Add item: [done] to stop: ").lower()
+      if item == "done" or item == "":
+         return your_cart
+      elif item not in grocery_items:
+          print(f"{item} not available")
+          print("item available are:")
+          for item in grocery_items:
+              print(f"{item:10}:{grocery_items[item]}")
+      else: your_cart.append(item)
+    return your_cart
+
+def get_total():
+   total = 0
+   for item in your_cart:
+      print(f"{item:15} :{grocery_items[item]}")
+      total += grocery_items[item]
+   return total
+
+def get_change():
+   running = True
+   while running:
+      bill = int(input("Insert bill: "))
+      if bill <= 0:
+         print("Invalid amount.")
+      elif bill < total:
+         print(f"Please enter a sufficient amount of {total}")  
+      else: 
+         return bill - total
+         
+your_cart = get_item()
+print()
+print("----your cart----")
+total = get_total()
+print(f"your total is: {total}")
+change = get_change()
+print(f"your change is: {change}")
