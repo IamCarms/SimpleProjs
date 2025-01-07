@@ -1,0 +1,68 @@
+def transaction():
+    global running 
+    choice = input("another transcation? [Y/N]: ").upper()
+    if choice != "Y" or choice == "":
+        running = False
+
+def show_balance():
+    print(f"your balance is {balance:.2f}")
+    transaction()
+    
+def user_withdraw():
+    global balance, running
+    if balance <= 0:
+        print(f"Currently you have {balance:.2f} balance.")
+        print("You need to deposit first to use this option.")
+        transaction()
+        return 0
+    else:
+        print(f"Your total balance is: {balance:.2f}")
+        amount = float(input("Enter amount to withdraw: "))
+        if amount < 0:
+            print("Invalid amount to withdraw. ")
+            transaction()
+            return 0
+        elif amount > balance:
+            print("insufficient amount to withdraw.")
+            print(f"your available balance is: {balance:.2f}")
+            transaction()
+            return 0 
+        else:
+            print("transaction complete")
+            print(f"You withdrawn {amount:.2f}")
+            balance -= amount
+            print(f"your remaining balance is: {balance:.2f}")
+            transaction()
+            return amount
+        
+def user_deposit():
+    amount = float(input("Enter amount to deposit: "))
+    if amount <= 0:
+        print(f"{amount:.2f} amount is invald.")
+        transaction()
+        return 0
+    else:
+        transaction()
+        return amount
+    
+choices = {"Show Balance": 1, "Withdraw": 2, "Deposit": 3, "Exit": 4}
+for option, value in choices.items():
+    print(f"{option:15}:{value}")
+
+print()    
+balance = 0
+running = True
+while running: 
+    choice = input("Select an option[1-4]: ")
+    if choice == "1":
+        show_balance()
+    elif choice == "2":
+        balance -= user_withdraw()
+    elif choice == "3":
+        balance += user_deposit()
+    elif choice == "4":
+        running = False
+    else:
+        print(f"{choice} is not in options")
+
+print("thank you, come again!")        
