@@ -1,0 +1,73 @@
+import random
+
+def play_again():
+    global running
+    choice = input("play again? [Y/N]: ").upper()
+    if choice != "Y" or choice == "":
+        running = False
+
+def spin_row():
+   symbols = ["💣", "🔔", "⭐", "🍒"]
+   return [random.choice(symbols) for symbol in range(3)]
+
+def display_row(row):
+    print(" | ".join(row))
+
+def user_payout(row, bet):
+    if "💣" in row:
+        return 0
+    if row[0] == row[1] == row[2]:
+        if row[0] == "🔔":
+            return bet * 5
+        elif row[0] == "⭐":
+            return bet * 15
+        elif row[0] == "🍒":
+            return bet * 10
+    return 0 
+
+print()
+print("--welcom to SlotMC program--")
+print("----[💣|  🔔 | ⭐ | 🍒]----")
+print()
+def main():
+    balance = (input("Insert money to play: "))
+    if not balance.isdigit():
+        print(f"{balance} is not valid")
+    else: 
+        balance = int(balance)   
+        if balance <= 0:
+            print(f"you cant insert {balance} amount.")
+        elif balance > 0:
+            running = balance > 0
+            while running:
+                print()
+                print(f"your current balance is: {balance}")
+                bet = input("Enter amount to bet: ")
+                if not bet.isdigit():
+                    print(f"{bet} is not valid")
+                else: 
+                    bet = int(bet)    
+                    if bet <= 0:
+                        print(f"{bet} is invalid")
+                    if bet > balance:
+                        print("insufficient funds")
+                    elif bet > 0:
+                        balance -= bet
+                        row = spin_row()
+                        display_row(row)
+                        pay_out = user_payout(row, bet)
+                        if balance == 0:
+                            running = False
+                            print("you are out of tokens") 
+                        if pay_out <= 0:
+                            print("you lose")
+                        else: 
+                            print(F"you won {pay_out}")
+                            balance += pay_out
+                            print(f"your total balance is: {balance}")        
+            if balance == 0:
+                print("youre out of tokens")
+                running = False                                         
+        print("thank you for plaing with us!")
+if __name__ == "__main__":
+    main()
