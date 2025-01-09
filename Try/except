@@ -1,0 +1,18 @@
+def try_again():
+    global running
+    choice = input("try again: [Y/N]: ").upper()
+    if choice != "Y" or choice == "":
+        running = False
+
+running = True
+while running:
+    try:
+        value = int(input('Enter a natural number: '))
+        print('The reciprocal of', value, 'is', 1/value)  
+        try_again()
+    except ValueError:
+        print('I do not know what to do.')
+    except ZeroDivisionError:
+        print('Division by zero is not allowed in our Universe.') 
+
+print("Exit...")
