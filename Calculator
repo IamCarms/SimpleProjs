@@ -1,0 +1,29 @@
+def calc(num1, optr, num2):
+    if optr == "+":
+        return num1 + num2
+    elif optr == "-":
+        return num1 - num2
+    elif optr == "*":
+        return num1 * num2
+    elif optr == "/":
+        if num1 == 0 or num2 == 0:
+            return None
+        else:
+            return float(round(num1 / num2, 3))
+    
+def main():
+    while True:
+        num1 = float(input("num1: "))
+        optr = input("[+, -, *, /]: ")
+        while optr not in ["+", "-", "*", "/"]:
+            print(f"{optr} is invalid")
+            optr = input("[+, -, *, /]: ")
+        num2 = float(input("num2: "))
+        ans = calc(num1, optr, num2)
+        if ans == None:
+            print("Zero Division is invalid")
+        else:    
+            print(f"{num1} {optr} {num2} = {ans} ")
+
+if __name__ == "__main__":
+    main()
